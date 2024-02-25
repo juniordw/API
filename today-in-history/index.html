@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Today in History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Today in History</h1>
+  </header>
+  <main>
+
+  </main>
+  <script>
+    async function fetchData() {
+      const url = 'https://today-in-history.p.rapidapi.com/thisday';
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': 'c3546cd4b1msh9f00e155d0b8b76p1d9885jsnbc05ad1b5460',
+          'X-RapidAPI-Host': 'today-in-history.p.rapidapi.com'
+        }
+      };
+
+      try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        console.log(result);
+        const h2 = `<h2>${result.article.date}</h2>`;
+        const h3 = `<h3><a href="${result.article.url}">${result.article.title}</a></h3>`;
+        document.querySelector('main').innerHTML = h2 + h3;
+
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchData(); 
+  </script>
+</body>
+
+</html>
